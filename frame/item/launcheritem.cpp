@@ -7,18 +7,13 @@
 #include "themeappicon.h"
 #include "utils.h"
 #include "../widgets/tipswidget.h"
-#include "dbusutil.h"
+#include "launcherservice.h"
 
 #include <QPainter>
-#include <QProcess>
+#include <QSvgRenderer>
 #include <QMouseEvent>
 #include <QApplication>
 #include <QGSettings>
-#include <QtConcurrent>
-#include <QDBusInterface>
-#include <QDBusPendingCall>
-#include <DDBusSender>
-#include <QDBusPendingReply>
 
 DCORE_USE_NAMESPACE
 
@@ -34,11 +29,15 @@ LauncherItem::LauncherItem(QWidget *parent)
 void LauncherItem::refreshIcon()
 {
     const int iconSize = qMin(width(), height());
-    if (DockDisplayMode == Efficient) {
-        ThemeAppIcon::getIcon(m_icon, "deepin-launcher", iconSize * 0.7);
-    } else {
-        ThemeAppIcon::getIcon(m_icon, "deepin-launcher", iconSize * 0.8);
-    }
+    const int size = DockDisplayMode == Efficient ? iconSize * 0.7 : iconSize * 0.8;
+
+    m_icon = QPixmap(size, size);
+    m_icon.fill(Qt::transparent);
+
+    QSvgRenderer renderer(QString(":/icons/resources/rocket.svg"));
+    QPainter painter(&m_icon);
+    renderer.render(&painter);
+    painter.end();
 
     update();
 }
@@ -85,17 +84,11 @@ void LauncherItem::mouseReleaseEvent(QMouseEvent *e)
 
     if (e->button() != Qt::LeftButton)
         return;
-    
-    QtConcurrent::run([=] {
-        DDBusSender dbusSender = DDBusSender()
-            .service(launcherService)
-            .path(launcherPath)
-            .interface(launcherInterface);
 
-        QDBusPendingReply<bool> visibleReply = dbusSender.property("Visible").get();
-        if (!visibleReply.value())
-        dbusSender.method("Toggle").call();
-    });
+    auto *service = LauncherService::instance();
+    if (!service->visible()) {
+        service->Toggle();
+    }
 }
 
 QWidget *LauncherItem::popupTips()

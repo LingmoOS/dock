@@ -83,5 +83,8 @@
         <file>resources/volume.svg</file>
         <file>resources/dcc_dock_plug_in.svg</file>
         <file>resources/broadcast.svg</file>
+        <file>resources/rocket.svg</file>
+        <file>resources/multitasking.svg</file>
+        <file>resources/lingmo-desktop.svg</file>
     </qresource>
 </RCC>

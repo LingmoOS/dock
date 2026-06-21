@@ -11,6 +11,7 @@
 #include "dockapplication.h"
 #include "traymainwindow.h"
 #include "windowmanager.h"
+#include "launcherservice.h"
 
 #include <QDir>
 #include <QStandardPaths>
@@ -231,6 +232,9 @@ int main(int argc, char *argv[])
     //保证dock daemon接口兼容性,dde-desktop,dde-clipboard,deepin-system-monitor,dde-osd等在调用。
     QDBusConnection::sessionBus().registerService("org.deepin.dde.daemon.Dock1");
     QDBusConnection::sessionBus().registerObject("/org/deepin/dde/daemon/Dock1", "org.deepin.dde.daemon.Dock1", &windowManager);
+
+    // 注册启动器D-Bus服务，使dock自带Launcher1服务
+    LauncherService::registerService();
 
     // 当任务栏以-r参数启动时，设置CANSHOW未false，之后调用launch不显示任务栏
     qApp->setProperty("CANSHOW", !parser.isSet(runOption));

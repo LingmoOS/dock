@@ -1,3 +1,13 @@
+lingmo-dock (6.2.1.lingmo.1) unstable; urgency=medium
+
+  * add D-Bus launcher service and rocket icon resource
+    - Implement LauncherService for launcher visibility management
+    - Add show, hide, toggle and exit methods
+    - Register launcher service on D-Bus session bus
+    - Add rocket SVG resource for launcher entry
+
+ -- Lingmo OS Team <team@lingmo.org>  Sun, 21 Jun 2026 23:55:00 +0800
+
 lingmo-dock (6.2.0.lingmo.1) unstable; urgency=medium
 
   * new release for Lingmo OS

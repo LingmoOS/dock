@@ -9,6 +9,7 @@
 #include <DWindowManagerHelper>
 #include <DDBusSender>
 #include <QPainter>
+#include <QSvgRenderer>
 
 #include <QIcon>
 
@@ -143,9 +144,13 @@ void MultitaskingPlugin::invokedMenuItem(const QString &itemKey, const QString &
 QIcon MultitaskingPlugin::icon(const DockPart &dockPart, DGuiApplicationHelper::ColorType themeType)
 {
     if (dockPart == DockPart::DCCSetting) {
-        auto icon = QIcon::fromTheme("dcc-multitasking-view", QIcon(":/icons/dcc-multitasking-view.svg"));
-        QPixmap pixmap = icon.pixmap(QSize(18, 18));
-        return pixmap;
+        QPixmap pixmap(QSize(18, 18));
+        pixmap.fill(Qt::transparent);
+        QSvgRenderer renderer(QString(":/icons/resources/multitasking.svg"));
+        QPainter painter(&pixmap);
+        renderer.render(&painter);
+        painter.end();
+        return QIcon(pixmap);
     }
 
     return QIcon();

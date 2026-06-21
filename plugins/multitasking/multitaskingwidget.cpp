@@ -7,13 +7,11 @@
 #include "multitaskingplugin.h"
 
 #include <QPainter>
-#include <QIcon>
+#include <QSvgRenderer>
 #include <QMouseEvent>
-#include <imageutil.h>
 
 MultitaskingWidget::MultitaskingWidget(QWidget *parent)
     : QWidget(parent)
-    , m_icon(QIcon::fromTheme(":/icons/deepin-multitasking-view.svg"))
 {
 
 }
@@ -28,18 +26,20 @@ void MultitaskingWidget::paintEvent(QPaintEvent *e)
     Q_UNUSED(e);
 
     const auto ratio = devicePixelRatioF();
-    QPixmap icon;
+    const int size = Dock::Fashion == qApp->property(PROP_DISPLAY_MODE).value<Dock::DisplayMode>()
+        ? int(this->size().width() * 0.8) : int(this->size().width() * 0.7);
 
-    if (Dock::Fashion == qApp->property(PROP_DISPLAY_MODE).value<Dock::DisplayMode>()) {
-        icon = ImageUtil::loadSvg("deepin-multitasking-view", QString(":/icons/"), int(size().width() * 0.8), ratio);
-    } else {
-        icon = ImageUtil::loadSvg("deepin-multitasking-view", QString(":/icons/"), int(size().width() * 0.7), ratio);
-    }
-
+    QPixmap icon(size, size);
+    icon.fill(Qt::transparent);
     icon.setDevicePixelRatio(ratio);
 
-    QPainter painter(this);
+    QSvgRenderer renderer(QString(":/icons/resources/multitasking.svg"));
+    QPainter painter(&icon);
+    renderer.render(&painter);
+    painter.end();
+
+    QPainter p(this);
     const QRectF &rf = QRectF(rect());
     const QRectF &rfp = QRectF(icon.rect());
-    painter.drawPixmap(rf.center() - rfp.center() / ratio, icon);
+    p.drawPixmap(rf.center() - rfp.center() / ratio, icon);
 }
