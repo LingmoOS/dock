@@ -1,0 +1,74 @@
+Source: lingmo-dock
+Section: x11
+Priority: optional
+Maintainer: Lingmo OS Team <team@lingmo.org>
+Build-Depends:
+         cmake,
+         debhelper-compat (= 10),
+         extra-cmake-modules,
+         libdbusmenu-qt5-dev,
+         libdtkcore-dev (>=5.4.14),
+         libdtkcore5-bin (>=5.4.14),
+         libdtkgui-dev (>=5.4.13),
+         libdtkwidget-dev (>=5.4.19),
+         libdwayland-dev,
+         libgmock-dev,
+         libgsettings-qt-dev,
+         libgtest-dev,
+         libqt5svg5-dev,
+         libqt5waylandclient5-dev,
+         libqt5x11extras5-dev,
+         libxcb-composite0-dev,
+         libxcb-damage0-dev,
+         libxcb-ewmh-dev,
+         libxcb-icccm4-dev,
+         libxcb-image0-dev,
+         libxcursor-dev,
+         libxdamage-dev,
+         libxres-dev,
+         libxtst-dev,
+         pkg-config,
+         qt5-qmake,
+         qtbase5-private-dev,
+         qttools5-dev,
+         qttools5-dev-tools,
+         qtwayland5-private-dev,
+Standards-Version: 4.5.6
+Homepage: http://lingmo.org/
+
+Package: lingmo-dock
+Architecture: any
+Depends: dbus-bin,
+         dde-daemon (>=5.13.12),
+         dde-qt5xcb-plugin (>=5.0.25),
+         velora-desktop-schemas (>=5.9.14),
+         lastore-daemon (>=5.2.9),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Recommends: dde-disk-mount-plugin,
+         dde-dock-onboard-plugin,
+         dde-network-dialog,
+         dock-network-plugin,
+Conflicts: dde-dock-applets,
+         dde-trash-plugin,
+         dde-workspace (<< 2.90.5),
+         dock-hotspot-plugin,
+Replaces: dde-dock-applets,
+         dde-trash-plugin,
+Description: deepin desktop-environment - dock module
+ Dock module of deepin desktop-environment
+
+Package: lingmo-dock-dev
+Architecture: any
+Depends: ${misc:Depends},
+Description: Lingmo OS - dock module development files
+ Dock module development files of deepin desktop-environment
+
+Package: lingmo-dock-onboard-plugin
+Architecture: any
+Depends:
+ onboard,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: deepin desktop-environment - dock plugin for onboard
+ Dock plugin for onboard of deepin desktop-environment
