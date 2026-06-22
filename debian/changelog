@@ -1,4 +1,4 @@
-lingmo-dock (6.2.1.lingmo.1) unstable; urgency=medium
+lingmo-dock (6.2.2.lingmo.1) unstable; urgency=medium
 
   * add D-Bus launcher service and rocket icon resource
     - Implement LauncherService for launcher visibility management

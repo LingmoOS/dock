@@ -33,7 +33,7 @@ bool LauncherService::registerService()
 }
 
 LauncherService::LauncherService(QObject *parent)
-    : QDBusAbstractAdaptor(parent)
+    : QObject(parent)
     , m_visible(false)
 {
 }
