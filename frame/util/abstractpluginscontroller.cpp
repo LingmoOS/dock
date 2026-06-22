@@ -77,27 +77,8 @@ void AbstractPluginsController::positionChanged()
 void AbstractPluginsController::loadPlugin(const QString &pluginFile)
 {
     QPluginLoader *pluginLoader = new QPluginLoader(pluginFile, this);
-    const QJsonObject &meta = pluginLoader->metaData().value("MetaData").toObject();
-    const QString &pluginApi = meta.value("api").toString();
-    bool pluginIsValid = true;
-    if (pluginApi.isEmpty() || !CompatiblePluginApiList.contains(pluginApi)) {
-        qDebug() << objectName()
-                 << "plugin api version not matched! expect versions:" << CompatiblePluginApiList
-                 << ", got version:" << pluginApi
-                 << ", the plugin file is:" << pluginFile;
-
-        pluginIsValid = false;
-    }
-
     PluginsItemInterface *interface = qobject_cast<PluginsItemInterface *>(pluginLoader->instance());
-    if (!interface) {
-        qDebug() << objectName() << "load plugin failed!!!" << pluginLoader->errorString() << pluginFile;
-
-        pluginLoader->unload();
-        pluginLoader->deleteLater();
-
-        pluginIsValid = false;
-    }
+    bool pluginIsValid = interface != nullptr;
 
     if (!pluginIsValid) {
         for (auto &pair : m_pluginLoadMap.keys()) {
