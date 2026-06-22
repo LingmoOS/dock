@@ -58,7 +58,6 @@ target_include_directories(${BIN_NAME} PUBLIC
     controller
     dbus
     display
-    launcher
     item
     item/components
     model

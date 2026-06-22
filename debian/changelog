@@ -1,4 +1,10 @@
-lingmo-dock (6.2.2.lingmo.1) unstable; urgency=medium
+lingmo-dock (6.2.3.lingmo.1) unstable; urgency=medium
+
+  * new release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 22 Jun 2026 11:55:00 +0800
+
+lingmo-dock (6.2.1.lingmo.1) unstable; urgency=medium
 
   * add D-Bus launcher service and rocket icon resource
     - Implement LauncherService for launcher visibility management

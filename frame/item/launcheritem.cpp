@@ -7,7 +7,8 @@
 #include "themeappicon.h"
 #include "utils.h"
 #include "../widgets/tipswidget.h"
-#include "launcherservice.h"
+
+#include <DDBusSender>
 
 #include <QPainter>
 #include <QSvgRenderer>
@@ -85,10 +86,12 @@ void LauncherItem::mouseReleaseEvent(QMouseEvent *e)
     if (e->button() != Qt::LeftButton)
         return;
 
-    auto *service = LauncherService::instance();
-    if (!service->visible()) {
-        service->Toggle();
-    }
+    DDBusSender()
+        .service("org.deepin.dde.Launcher1")
+        .interface("org.deepin.dde.Launcher1")
+        .path("/org/deepin/dde/Launcher1")
+        .method(QString("Toggle"))
+        .call();
 }
 
 QWidget *LauncherItem::popupTips()

@@ -84,7 +84,6 @@ include_directories(
     frame/accessible
     frame/controller
     frame/dbus
-    frame/launcher
     frame/dbus/sni
     frame/display
     frame/item
