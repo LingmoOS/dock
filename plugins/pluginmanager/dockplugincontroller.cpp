@@ -459,7 +459,8 @@ void DockPluginController::loadPlugin(const QString &pluginFile)
                  << ", got version:" << pluginApi
                  << ", the plugin file is:" << pluginFile;
 
-        pluginIsValid = false;
+        // Don't mark invalid here — let qobject_cast decide compatibility;
+        // a mismatched metadata version doesn't guarantee the plugin won't load.
     }
 
     PluginsItemInterface *interface = qobject_cast<PluginsItemInterface *>(pluginLoader->instance());
