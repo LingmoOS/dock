@@ -91,6 +91,8 @@ void MainWindowBase::initAttribute()
         } else {
             //2 确保这两行代码的先后顺序，否则会导致任务栏界面不再置顶
             XcbMisc::instance()->set_window_type(xcb_window_t(this->winId()), XcbMisc::Dock);
+            // 确保 dock 在所有工作区可见
+            XcbMisc::instance()->set_window_on_all_desktops(xcb_window_t(this->winId()));
         }
     }
 

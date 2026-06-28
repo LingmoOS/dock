@@ -52,6 +52,12 @@ void XcbMisc::set_window_type(xcb_window_t winId, WindowType winType)
     xcb_ewmh_set_wm_window_type(&m_ewmh_connection, winId, 1, atoms);
 }
 
+void XcbMisc::set_window_on_all_desktops(xcb_window_t winId)
+{
+    // 0xFFFFFFFF means show on all desktops (sticky)
+    xcb_ewmh_set_wm_desktop(&m_ewmh_connection, winId, 0xFFFFFFFF);
+}
+
 void XcbMisc::clear_strut_partial(xcb_window_t winId)
 {
     xcb_ewmh_wm_strut_partial_t strutPartial;
