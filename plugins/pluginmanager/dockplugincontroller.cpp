@@ -463,6 +463,14 @@ void DockPluginController::loadPlugin(const QString &pluginFile)
         // a mismatched metadata version doesn't guarantee the plugin won't load.
     }
 
+    // TODO
+    // const QString &iid = pluginLoader->metaData().value("IID").toString();
+    // if (iid == "com.deepin.dock.PluginsItemInterface_V2") {
+    //     pluginLoader->unload();
+    //     pluginLoader->deleteLater();
+    //     return;
+    // }
+
     PluginsItemInterface *interface = qobject_cast<PluginsItemInterface *>(pluginLoader->instance());
     if (!interface) {
         // 如果识别当前插件失败，就认为这个插件是v20的插件，将其转换为v20插件接口
