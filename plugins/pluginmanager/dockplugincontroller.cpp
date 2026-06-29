@@ -25,7 +25,8 @@ static const QStringList CompatiblePluginApiList {
     "1.2",
     "1.2.1",
     "1.2.2",
-    DOCK_PLUGIN_API_VERSION
+    "2.0.99"
+    DCK_PLUGIN_API_VERSION
 };
 
 class PluginInfo : public QObject
