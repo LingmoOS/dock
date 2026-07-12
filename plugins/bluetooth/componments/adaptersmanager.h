@@ -7,7 +7,7 @@
 #define ADAPTERSMANAGER_H
 
 #include "org_deepin_dde_bluetooth1.h"
-using  DBusBluetooth = org::deepin::dde::Bluetooth1;
+using  DBusBluetooth = org::lingmo::Bluetooth1;
 
 class Adapter;
 class Device;

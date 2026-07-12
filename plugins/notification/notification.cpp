@@ -30,9 +30,9 @@ Notification::Notification(QWidget *parent)
     setMinimumSize(PLUGIN_BACKGROUND_MIN_SIZE, PLUGIN_BACKGROUND_MIN_SIZE);
     connect(this, &Notification::dndModeChanged, this, &Notification::refreshIcon);
     QtConcurrent::run([this](){
-        m_dbus.reset(new QDBusInterface("org.deepin.dde.Notification1", "/org/deepin/dde/Notification1", "org.deepin.dde.Notification1"));
-        // Refresh icon for the first time, cause org.deepin.dde.Notification1 might depend on dock's DBus,
-        // we should not call org.deepin.dde.Notification1 in the main thread before dock's dbus is initialized.
+        m_dbus.reset(new QDBusInterface("org.lingmo.Notification1", "/org/lingmo/Notification1", "org.lingmo.Notification1"));
+        // Refresh icon for the first time, cause org.lingmo.Notification1 might depend on dock's DBus,
+        // we should not call org.lingmo.Notification1 in the main thread before dock's dbus is initialized.
         // Just refresh icon in the other thread.
         QDBusReply<QDBusVariant> dnd = m_dbus->call(QLatin1String("GetSystemInfo"), QVariant::fromValue(0u));
         if (!dnd.isValid()) {
@@ -41,7 +41,7 @@ Notification::Notification(QWidget *parent)
             m_dndMode = dnd.value().variant().toBool();
             refreshIcon();
         }
-        QDBusConnection::sessionBus().connect("org.deepin.dde.Notification1",
+        QDBusConnection::sessionBus().connect("org.lingmo.Notification1",
                                               "/org/deepin/dde/Notification1",
                                               "org.deepin.dde.Notification1",
                                               "SystemInfoChanged",
@@ -54,7 +54,7 @@ Notification::Notification(QWidget *parent)
         } else {
             setNotificationCount(recordCountVariant.toUInt());
         }
-        QDBusConnection::sessionBus().connect("org.deepin.dde.Notification1",
+        QDBusConnection::sessionBus().connect("org.lingmo.Notification1",
                                               "/org/deepin/dde/Notification1",
                                               "org.deepin.dde.Notification1",
                                               "recordCountChanged",

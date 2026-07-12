@@ -10,15 +10,15 @@
 #include <QtDBus/QtDBus>
 #include "org_deepin_dde_inputdevice1_keyboard.h"
 
-using Keyboard = org::deepin::dde::inputdevice1::Keyboard;
+using Keyboard = org::lingmo::inputdevice1::Keyboard;
 class QGSettings;
 
 class DBusAdaptors : public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.deepin.dde.Dock1.KeyboardLayout")
+    Q_CLASSINFO("D-Bus Interface", "org.lingmo.Dock1.KeyboardLayout")
 //    Q_CLASSINFO("D-Bus Introspection", ""
-//                "  <interface name=\"org.deepin.dde.Dock1.KeyboardLayout\">\n"
+//                "  <interface name=\"org.lingmo.Dock1.KeyboardLayout\">\n"
 //                "    <property access=\"read\" type=\"s\" name=\"layout\"/>\n"
 //                "    <signal name=\"layoutChanged\">"
 //                "        <arg name=\"layout\" type=\"s\"/>"

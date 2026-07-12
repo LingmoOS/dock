@@ -32,7 +32,7 @@ ShutdownPlugin::ShutdownPlugin(QObject *parent)
     , m_pluginLoaded(false)
     , m_shutdownWidget(nullptr)
     , m_tipsLabel(new TipsWidget)
-    , m_powerManagerInter(new DBusPowerManager("org.deepin.dde.PowerManager1", "/org/deepin/dde/PowerManager1", QDBusConnection::systemBus(), this))
+    , m_powerManagerInter(new DBusPowerManager("org.lingmo.PowerManager1", "/org/lingmo/PowerManager1", QDBusConnection::systemBus(), this))
     , m_gsettings(Utils::ModuleSettingsPtr("shutdown", QByteArray(), this))
     , m_sessionShellGsettings(Utils::SettingsPtr("com.deepin.dde.session-shell", "/com/deepin/dde/session-shell/", this))
 {
@@ -97,7 +97,7 @@ const QString ShutdownPlugin::itemCommand(const QString &itemKey)
 {
     Q_UNUSED(itemKey);
 
-    return QString("dbus-send --print-reply --dest=org.deepin.dde.ShutdownFront1 /org/deepin/dde/ShutdownFront1 org.deepin.dde.ShutdownFront1.Show");
+    return QString("dbus-send --print-reply --dest=org.lingmo.ShutdownFront1 /org/lingmo/ShutdownFront1 org.lingmo.ShutdownFront1.Show");
 }
 
 const QString ShutdownPlugin::itemContextMenu(const QString &itemKey)
@@ -219,15 +219,15 @@ void ShutdownPlugin::invokedMenuItem(const QString &itemKey, const QString &menu
 
     if (menuId == "power") {
         DDBusSender()
-        .service("org.deepin.dde.ControlCenter1")
-        .interface("org.deepin.dde.ControlCenter1")
+        .service("org.lingmo.ControlCenter1")
+        .interface("org.lingmo.ControlCenter1")
         .path("/org/deepin/dde/ControlCenter1")
         .method(QString("ShowPage"))
         .arg(QString("power"))
         .call();
     } else if (menuId == "Lock") {
         if (QFile::exists(ICBC_CONF_FILE)) {
-            QDBusMessage send = QDBusMessage::createMethodCall("org.deepin.dde.LockFront1", "/org/deepin/dde/LockFront1", "org.deepin.dde.LockFront1", "SwitchTTYAndShow");
+            QDBusMessage send = QDBusMessage::createMethodCall("org.lingmo.LockFront1", "/org/lingmo/LockFront1", "org.lingmo.LockFront1", "SwitchTTYAndShow");
             QDBusConnection conn = QDBusConnection::connectToBus("unix:path=/run/user/1000/bus", "unix:path=/run/user/1000/bus");
             QDBusMessage reply = conn.call(send);
 #ifdef QT_DEBUG
@@ -236,16 +236,16 @@ void ShutdownPlugin::invokedMenuItem(const QString &itemKey, const QString &menu
 
         } else {
             DDBusSender()
-            .service("org.deepin.dde.LockFront1")
-            .interface("org.deepin.dde.LockFront1")
+            .service("org.lingmo.LockFront1")
+            .interface("org.lingmo.LockFront1")
             .path("/org/deepin/dde/LockFront1")
             .method(QString("Show"))
             .call();
         }
     } else
         DDBusSender()
-        .service("org.deepin.dde.ShutdownFront1")
-        .interface("org.deepin.dde.ShutdownFront1")
+        .service("org.lingmo.ShutdownFront1")
+        .interface("org.lingmo.ShutdownFront1")
         .path("/org/deepin/dde/ShutdownFront1")
         .method(QString(menuId))
         .call();

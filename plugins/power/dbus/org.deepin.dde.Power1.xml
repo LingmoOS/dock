@@ -1,4 +1,4 @@
-     <interface name="org.deepin.dde.Power1">
+     <interface name="org.lingmo.Power1">
           <!--method name="Reset"></method>
           <property name="LinePowerScreenBlackDelay" type="i" access="readwrite"></property>
           <property name="LinePowerSleepDelay" type="i" access="readwrite"></property>

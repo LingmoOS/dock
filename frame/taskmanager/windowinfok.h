@@ -12,7 +12,7 @@
 #include <qobject.h>
 #include <qscopedpointer.h>
 
-using PlasmaWindow = org::deepin::dde::kwayland1::PlasmaWindow;
+using PlasmaWindow = org::lingmo::kwayland1::PlasmaWindow;
 
 class Entry;
 class ProcessInfo;

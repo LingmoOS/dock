@@ -1,4 +1,4 @@
-   <interface name="org.deepin.dde.Appearance1">
+   <interface name="org.lingmo.Appearance1">
 <!--      
      <method name="Delete">
        <arg direction="in" type="s" name="ty"/>

@@ -46,8 +46,8 @@ void KeyboardPlugin::init(PluginProxyInterface *proxyInter)
             m_dbusAdaptors = new DBusAdaptors(this);
         }
 
-        QDBusConnection::sessionBus().registerService("org.deepin.dde.Dock1.KeyboardLayout");
-        QDBusConnection::sessionBus().registerObject("/org/deepin/dde/Dock1/KeyboardLayout", "org.deepin.dde.Dock1.KeyboardLayout", this);
+        QDBusConnection::sessionBus().registerService("org.lingmo.Dock1.KeyboardLayout");
+        QDBusConnection::sessionBus().registerObject("/org/lingmo/Dock1/KeyboardLayout", "org.lingmo.Dock1.KeyboardLayout", this);
     }
 }
 

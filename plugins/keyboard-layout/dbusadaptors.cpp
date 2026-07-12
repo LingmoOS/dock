@@ -11,8 +11,8 @@
 
 DBusAdaptors::DBusAdaptors(QObject *parent)
     : QDBusAbstractAdaptor(parent)
-    , m_keyboard(new Keyboard("org.deepin.dde.InputDevices1",
-                              "/org/deepin/dde/InputDevice1/Keyboard",
+    , m_keyboard(new Keyboard("org.lingmo.InputDevices1",
+                              "/org/lingmo/InputDevice1/Keyboard",
                               QDBusConnection::sessionBus(), this))
     , m_menu(new QMenu)
     , m_gsettings(Utils::ModuleSettingsPtr("keyboard", QByteArray(), this))
@@ -161,9 +161,9 @@ void DBusAdaptors::handleActionTriggered(QAction *action)
 {
     if (action == m_addLayoutAction) {
         DDBusSender()
-                .service("org.deepin.dde.ControlCenter1")
-                .interface("org.deepin.dde.ControlCenter1")
-                .path("/org/deepin/dde/ControlCenter1")
+                .service("org.lingmo.ControlCenter1")
+                .interface("org.lingmo.ControlCenter1")
+                .path("/org/lingmo/ControlCenter1")
                 .method("ShowPage")
                 .arg(QString("keyboard/keyboardGeneral/keyboardLayout"))
                 .call();

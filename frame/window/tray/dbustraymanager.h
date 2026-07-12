@@ -18,7 +18,7 @@
 typedef QList<quint32> TrayList;
 
 /*
- * Proxy class for interface org.deepin.dde.TrayManager1
+ * Proxy class for interface org.lingmo.TrayManager1
  */
 class DBusTrayManager: public QDBusAbstractInterface
 {
@@ -30,7 +30,7 @@ class DBusTrayManager: public QDBusAbstractInterface
         if (3 != arguments.count())
             return;
         QString interfaceName = msg.arguments().at(0).toString();
-        if (interfaceName !="org.deepin.dde.TrayManager1")
+        if (interfaceName !="org.lingmo.TrayManager1")
             return;
         QVariantMap changedProps = qdbus_cast<QVariantMap>(arguments.at(1).value<QDBusArgument>());
         foreach(const QString &prop, changedProps.keys()) {
@@ -45,7 +45,7 @@ class DBusTrayManager: public QDBusAbstractInterface
    }
 public:
     static inline const char *staticInterfaceName()
-    { return "org.deepin.dde.TrayManager1"; }
+    { return "org.lingmo.TrayManager1"; }
 
 public:
     explicit DBusTrayManager(QObject *parent = 0);
@@ -99,10 +99,8 @@ void TrayIconsChanged();
 };
 
 namespace com {
-  namespace deepin {
-    namespace dde {
-      typedef ::DBusTrayManager TrayManager;
-    }
+  namespace lingmo {
+    typedef ::DBusTrayManager TrayManager;
   }
 }
 #endif

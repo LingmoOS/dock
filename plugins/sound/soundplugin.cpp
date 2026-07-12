@@ -152,9 +152,9 @@ bool SoundPlugin::eventHandler(QEvent *event)
         return PluginsItemInterface::eventHandler(event);
 
     // 获取当前默认的声音设备
-    QDBusPendingCall defaultSinkCall = DDBusSender().service("org.deepin.dde.Audio1")
+    QDBusPendingCall defaultSinkCall = DDBusSender().service("org.lingmo.Audio1")
             .path("/org/deepin/dde/Audio1")
-            .interface("org.deepin.dde.Audio1")
+            .interface("org.lingmo.Audio1")
             .property("DefaultSink").get();
     defaultSinkCall.waitForFinished();
     QDBusReply<QVariant> path = defaultSinkCall.reply();
@@ -163,16 +163,16 @@ bool SoundPlugin::eventHandler(QEvent *event)
         return false;
 
     // 获取当前默认声音设备的音量
-    DDBusSender sinkDBus = DDBusSender().service("org.deepin.dde.Audio1")
-            .path(defaultSinkPath).interface("org.deepin.dde.Audio1.Sink");
+    DDBusSender sinkDBus = DDBusSender().service("org.lingmo.Audio1")
+            .path(defaultSinkPath).interface("org.lingmo.Audio1.Sink");
     QDBusPendingCall volumeCall = sinkDBus.property("Volume").get();
     volumeCall.waitForFinished();
     QDBusReply<QVariant> volumePath = volumeCall.reply();
     double volume = volumePath.value().value<double>();
 
     // 获取当前默认声音设备的最大音量
-    DDBusSender audioDBus = DDBusSender().service("org.deepin.dde.Audio1")
-            .path("/org/deepin/dde/Audio1").interface("org.deepin.dde.Audio1");
+    DDBusSender audioDBus = DDBusSender().service("org.lingmo.Audio1")
+            .path("/org/lingmo/Audio1").interface("org.lingmo.Audio1");
     QDBusPendingCall call = audioDBus.property("MaxUIVolume").get();
     call.waitForFinished();
     QDBusReply<QVariant> maxVolumeReply = call.reply();

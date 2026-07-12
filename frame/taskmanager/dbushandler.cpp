@@ -16,11 +16,11 @@
 DBusHandler::DBusHandler(TaskManager *taskmanager, QObject *parent)
     : QObject(parent)
     , m_taskmanager(taskmanager)
-    , m_wm(new com::deepin::wm("com.deepin.wm", "/com/deepin/wm", QDBusConnection::sessionBus(), this))
-    , m_wmSwitcher(new org::deepin::dde::WMSwitcher1("org.deepin.dde.WMSwitcher1", "/org/deepin/dde/WMSwitcher1", QDBusConnection::sessionBus(), this))
+    , m_wm(new com::lingmo::wm("com.lingmo.wm", "/com/lingmo/wm", QDBusConnection::sessionBus(), this))
+    , m_wmSwitcher(new org::lingmo::WMSwitcher1("org.lingmo.WMSwitcher1", "/org/lingmo/WMSwitcher1", QDBusConnection::sessionBus(), this))
     , m_kwaylandManager(nullptr)
     , m_xEventMonitor(nullptr)
-    , m_launcher(new org::deepin::dde::Launcher1(launcherService, launcherPath, QDBusConnection::sessionBus(), this))
+    , m_launcher(new org::lingmo::Launcher1(launcherService, launcherPath, QDBusConnection::sessionBus(), this))
 {
     QDBusInterface *interAM = new QDBusInterface(ApplicationManager1DBusName, "/org/desktopspec/ApplicationManager1", "org.desktopspec.DBus.ObjectManager", QDBusConnection::sessionBus(), this);
     if (interAM->isValid()) {
@@ -29,14 +29,14 @@ DBusHandler::DBusHandler(TaskManager *taskmanager, QObject *parent)
         qWarning() << "The interface of AM is invalid:" << interAM->lastError();
     }
 
-    connect(m_wmSwitcher, &org::deepin::dde::WMSwitcher1::WMChanged, this, [&](QString name) {m_taskmanager->setWMName(name);});
+    connect(m_wmSwitcher, &org::lingmo::WMSwitcher1::WMChanged, this, [&](QString name) {m_taskmanager->setWMName(name);});
     if (!isWaylandSession()) {
-        m_xEventMonitor = new org::deepin::dde::XEventMonitor1("org.deepin.dde.XEventMonitor1", "/org/deepin/dde/XEventMonitor1", QDBusConnection::sessionBus(), this);
+        m_xEventMonitor = new org::lingmo::XEventMonitor1("org.lingmo.XEventMonitor1", "/org/lingmo/XEventMonitor1", QDBusConnection::sessionBus(), this);
         m_activeWindowMonitorKey = m_xEventMonitor->RegisterFullScreen();
-        connect(m_xEventMonitor, &org::deepin::dde::XEventMonitor1::ButtonRelease, this, &DBusHandler::onActiveWindowButtonRelease);
+        connect(m_xEventMonitor, &org::lingmo::XEventMonitor1::ButtonRelease, this, &DBusHandler::onActiveWindowButtonRelease);
     }
 
-    connect(m_launcher,static_cast<void (org::deepin::dde::Launcher1::*)(bool)>(&org::deepin::dde::Launcher1::VisibleChanged), this, [=] (const bool visible){
+    connect(m_launcher,static_cast<void (org::lingmo::Launcher1::*)(bool)>(&org::lingmo::Launcher1::VisibleChanged), this, [=] (const bool visible){
         m_taskmanager->setDdeLauncherVisible(visible);
         m_taskmanager->updateHideState(true);
     });
@@ -54,12 +54,12 @@ DBusHandler::DBusHandler(TaskManager *taskmanager, QObject *parent)
 
 void DBusHandler::listenWaylandWMSignals()
 {
-    m_kwaylandManager = new org::deepin::dde::kwayland1::WindowManager("org.deepin.dde.KWayland1", "/org/deepin/dde/KWayland1/WindowManager", QDBusConnection::sessionBus(), this);
-    connect(m_kwaylandManager, &org::deepin::dde::kwayland1::WindowManager::ActiveWindowChanged, this, &DBusHandler::handleWlActiveWindowChange);
-    connect(m_kwaylandManager, &org::deepin::dde::kwayland1::WindowManager::WindowCreated, this, [&] (const QString &ObjPath) {
+    m_kwaylandManager = new org::lingmo::kwayland1::WindowManager("org.lingmo.KWayland1", "/org/lingmo/KWayland1/WindowManager", QDBusConnection::sessionBus(), this);
+    connect(m_kwaylandManager, &org::lingmo::kwayland1::WindowManager::ActiveWindowChanged, this, &DBusHandler::handleWlActiveWindowChange);
+    connect(m_kwaylandManager, &org::lingmo::kwayland1::WindowManager::WindowCreated, this, [&] (const QString &ObjPath) {
         m_taskmanager->registerWindowWayland(ObjPath);
     });
-    connect(m_kwaylandManager, &org::deepin::dde::kwayland1::WindowManager::WindowRemove, this, [&] (const QString &ObjPath) {
+    connect(m_kwaylandManager, &org::lingmo::kwayland1::WindowManager::WindowRemove, this, [&] (const QString &ObjPath) {
         m_taskmanager->unRegisterWindowWayland(ObjPath);
     });
 }
@@ -102,13 +102,13 @@ void DBusHandler::launchAppAction(QString desktopFile, QString action, uint32_t 
 
 void DBusHandler::launchAppUsingApplication1Manager(QString desktopFile, uint32_t timestamp, QStringList files)
 {
-    QDBusInterface interface = QDBusInterface("org.deepin.dde.Application1.Manager", "/org/deepin/dde/Application1/Manager", "org.deepin.dde.Application1.Manager");
+    QDBusInterface interface = QDBusInterface("org.lingmo.Application1.Manager", "/org/lingmo/Application1/Manager", "org.lingmo.Application1.Manager");
     interface.call("LaunchApp", desktopFile, timestamp, files);
 }
 
 void DBusHandler::launchAppActionUsingApplication1Manager(QString desktopFile, QString action, uint32_t timestamp)
 {
-    QDBusInterface interface = QDBusInterface("org.deepin.dde.Application1.Manager", "/org/deepin/dde/Application1/Manager", "org.deepin.dde.Application1.Manager");
+    QDBusInterface interface = QDBusInterface("org.lingmo.Application1.Manager", "/org/lingmo/Application1/Manager", "org.lingmo.Application1.Manager");
     interface.call("LaunchAppAction", desktopFile, action, timestamp);
 }
 
@@ -128,7 +128,7 @@ void DBusHandler::launchAppActionUsingApplicationManager1(QString dbusObjectPath
 
 void DBusHandler::markAppLaunched(const QString &filePath)
 {
-    QDBusInterface interface = QDBusInterface("org.deepin.dde.AlRecorder1", "/org/deepin/dde/AlRecorder1", "org.deepin.dde.AlRecorder1");
+    QDBusInterface interface = QDBusInterface("org.lingmo.AlRecorder1", "/org/lingmo/AlRecorder1", "org.lingmo.AlRecorder1");
     interface.call("MarkLaunched", filePath);
 }
 
@@ -225,7 +225,7 @@ void DBusHandler::listenKWindowSignals(WindowInfoK *windowInfo)
 
 PlasmaWindow *DBusHandler::createPlasmaWindow(QString objPath)
 {
-    return new PlasmaWindow("org.deepin.dde.KWayland1", objPath, QDBusConnection::sessionBus(), this);
+    return new PlasmaWindow("org.lingmo.KWayland1", objPath, QDBusConnection::sessionBus(), this);
 }
 
 /**

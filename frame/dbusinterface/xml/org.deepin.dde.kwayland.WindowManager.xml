@@ -1,4 +1,4 @@
-<interface name="org.deepin.dde.KWayland1.WindowManager">
+<interface name="org.lingmo.KWayland1.WindowManager">
     <signal name="InterfaceAboutToBeReleased"/>
     <signal name="InterfaceAboutToBeDestroyed"/>
     <signal name="ShowingDesktopChanged">

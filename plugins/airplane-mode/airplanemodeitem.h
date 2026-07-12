@@ -10,7 +10,7 @@
 
 #include <QWidget>
 
-using DBusAirplaneMode = org::deepin::dde::AirplaneMode1;
+using DBusAirplaneMode = org::lingmo::AirplaneMode1;
 
 namespace Dock {
 class TipsWidget;

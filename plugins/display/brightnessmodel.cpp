@@ -13,7 +13,7 @@
 #include <QScreen>
 #include <qobjectdefs.h>
 
-static const QString serviceName("org.deepin.dde.Display1");
+static const QString serviceName("org.lingmo.Display1");
 static const QString servicePath("/org/deepin/dde/Display1");
 static const QString serviceInterface("org.deepin.dde.Display1");
 static const QString propertiesInterface("org.freedesktop.DBus.Properties");

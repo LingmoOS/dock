@@ -85,7 +85,7 @@ void PowerPlugin::init(PluginProxyInterface *proxyInter)
 const QString PowerPlugin::itemCommand(const QString &itemKey)
 {
     if (itemKey == POWER_KEY)
-        return QString("dbus-send --print-reply --dest=org.deepin.dde.ControlCenter1 /org/deepin/dde/ControlCenter1 org.deepin.dde.ControlCenter1.ShowPage string:power");
+        return QString("dbus-send --print-reply --dest=org.lingmo.ControlCenter1 /org/lingmo/ControlCenter1 org.lingmo.ControlCenter1.ShowPage string:power");
 
     return QString();
 }
@@ -97,8 +97,8 @@ void PowerPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
 
     if (menuId == "power") {
         DDBusSender()
-        .service("org.deepin.dde.ControlCenter1")
-        .interface("org.deepin.dde.ControlCenter1")
+        .service("org.lingmo.ControlCenter1")
+        .interface("org.lingmo.ControlCenter1")
         .path("/org/deepin/dde/ControlCenter1")
         .method(QString("ShowPage"))
         .arg(QString("power"))
@@ -175,7 +175,7 @@ void PowerPlugin::loadPlugin()
 
     m_powerInter = new DBusPower(this);
 
-    m_systemPowerInter = new SystemPowerInter("org.deepin.dde.Power1", "/org/deepin/dde/Power1", QDBusConnection::systemBus(), this);
+    m_systemPowerInter = new SystemPowerInter("org.lingmo.Power1", "/org/lingmo/Power1", QDBusConnection::systemBus(), this);
     m_systemPowerInter->setSync(true);
 
     connect(m_dconfig, &DConfig::valueChanged, this, &PowerPlugin::onGSettingsChanged);

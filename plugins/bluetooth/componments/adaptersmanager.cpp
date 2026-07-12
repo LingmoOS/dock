@@ -48,7 +48,7 @@ AdaptersManager::AdaptersManager(QObject *parent)
     });
 #endif
 
-    QDBusInterface inter("org.deepin.dde.Bluetooth1",
+    QDBusInterface inter("org.lingmo.Bluetooth1",
                          "/org/deepin/dde/Bluetooth1",
                          "org.deepin.dde.Bluetooth1",
                          QDBusConnection::sessionBus());

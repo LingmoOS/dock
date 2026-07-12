@@ -53,8 +53,8 @@ SoundDevicesWidget::SoundDevicesWidget(QWidget *parent)
     , m_sliderContainer(new SliderContainer(this))
     , m_descriptionLabel(new QLabel(tr("Output Device"), this))
     , m_deviceList(new DListView(this))
-    , m_soundInter(new DBusAudio("org.deepin.dde.Audio1", "/org/deepin/dde/Audio1", QDBusConnection::sessionBus(), this))
-    , m_sinkInter(new DBusSink("org.deepin.dde.Audio1", m_soundInter->defaultSink().path(), QDBusConnection::sessionBus(), this))
+    , m_soundInter(new DBusAudio("org.lingmo.Audio1", "/org/lingmo/Audio1", QDBusConnection::sessionBus(), this))
+    , m_sinkInter(new DBusSink("org.lingmo.Audio1", m_soundInter->defaultSink().path(), QDBusConnection::sessionBus(), this))
     , m_model(new QStandardItemModel(this))
     , m_setVolumeTimer(new QTimer(this))
 {
@@ -446,9 +446,9 @@ void SoundDevicesWidget::onSelectIndexChanged(const QModelIndex &index)
     } else {
         // 如果是点击声音设置，则打开控制中心的声音模块
         QtConcurrent::run([=] {
-            DDBusSender().service("org.deepin.dde.ControlCenter1")
+            DDBusSender().service("org.lingmo.ControlCenter1")
                 .path("/org/deepin/dde/ControlCenter1")
-                .interface("org.deepin.dde.ControlCenter1")
+                .interface("org.lingmo.ControlCenter1")
                 .method("ShowPage").arg(QString("sound")).call();
          });
         emit requestHide();
@@ -458,7 +458,7 @@ void SoundDevicesWidget::onSelectIndexChanged(const QModelIndex &index)
 void SoundDevicesWidget::onDefaultSinkChanged(const QDBusObjectPath &value)
 {
     delete m_sinkInter;
-    m_sinkInter = new DBusSink("org.deepin.dde.Audio1", m_soundInter->defaultSink().path(), QDBusConnection::sessionBus(), this);
+    m_sinkInter = new DBusSink("org.lingmo.Audio1", m_soundInter->defaultSink().path(), QDBusConnection::sessionBus(), this);
     connect(m_sinkInter, &DBusSink::VolumeChanged, this, [ = ](double value) {
         m_sliderContainer->updateSliderValue(value * 100);
         emit iconChanged();

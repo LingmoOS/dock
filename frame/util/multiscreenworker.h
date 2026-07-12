@@ -38,9 +38,9 @@ DGUI_USE_NAMESPACE
 #define DRAG_AREA_SIZE (5)
 #define DOCKSPACE (WINDOWMARGIN * 2)
 
-using XEventMonitor = ::org::deepin::dde::XEventMonitor1;
-using DBusLuncher = ::org::deepin::dde::Launcher1;
-using Appearance = org::deepin::dde::Appearance1;
+using XEventMonitor = ::org::lingmo::XEventMonitor1;
+using DBusLuncher = ::org::lingmo::Launcher1;
+using Appearance = org::lingmo::Appearance1;
 
 using namespace Dock;
 class QVariantAnimation;

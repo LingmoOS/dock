@@ -1,4 +1,4 @@
-  <interface name="org.deepin.dde.Audio1.Sink">
+  <interface name="org.lingmo.Audio1.Sink">
     <method name="GetMeter">
       <arg type="o" direction="out"/>
     </method>

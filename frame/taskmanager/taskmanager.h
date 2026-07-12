@@ -21,7 +21,7 @@ class X11Manager;
 class WindowInfoK;
 class WindowInfoX;
 
-using PlasmaWindow = org::deepin::dde::kwayland1::PlasmaWindow;
+using PlasmaWindow = org::lingmo::kwayland1::PlasmaWindow;
 
 // 任务管理
 class TaskManager : public QObject

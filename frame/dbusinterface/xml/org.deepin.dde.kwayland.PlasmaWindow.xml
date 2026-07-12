@@ -1,4 +1,4 @@
-<interface name="org.deepin.dde.KWayland1.PlasmaWindow">
+<interface name="org.lingmo.KWayland1.PlasmaWindow">
     <signal name="ActiveChanged"/>
     <signal name="AppIdChanged"/>
     <signal name="CloseableChanged"/>

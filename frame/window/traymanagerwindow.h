@@ -18,7 +18,7 @@ namespace Dtk { namespace Widget { class DBlurEffectWidget; } }
 
 using namespace Dtk::Widget;
 
-using Timedate = org::deepin::dde::Timedate1;
+using Timedate = org::lingmo::Timedate1;
 
 class QuickPluginWindow;
 class QBoxLayout;

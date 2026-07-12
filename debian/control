@@ -39,13 +39,13 @@ Homepage: http://lingmo.org/
 Package: lingmo-dock
 Architecture: any
 Depends: dbus-bin,
-         dde-daemon (>=5.13.12),
-         dde-qt5xcb-plugin (>=5.0.25),
-         velora-desktop-schemas (>=5.9.14),
+         lingmo-daemon (>=5.13.12),
+         lingmo-qt5xcb-plugin (>=5.0.25),
+         lingmo-desktop-schemas (>=5.9.14),
          lastore-daemon (>=5.2.9),
          ${misc:Depends},
          ${shlibs:Depends},
-Recommends: dde-disk-mount-plugin,
+Recommends: lingmo-disk-mount-plugin,
          dde-dock-onboard-plugin,
          dde-network-dialog,
          dock-network-plugin,

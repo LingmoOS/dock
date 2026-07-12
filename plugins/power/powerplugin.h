@@ -14,7 +14,7 @@
 
 #include <QLabel>
 
-using SystemPowerInter = org::deepin::dde::Power1;
+using SystemPowerInter = org::lingmo::Power1;
 
 DCORE_BEGIN_NAMESPACE
 class DConfig;
@@ -27,7 +27,7 @@ class PowerPlugin : public QObject, PluginsItemInterface
 {
     Q_OBJECT
     Q_INTERFACES(PluginsItemInterface)
-    Q_PLUGIN_METADATA(IID "com.deepin.dock.PluginsItemInterface" FILE "power.json")
+    Q_PLUGIN_METADATA(IID "com.lingmo.dock.PluginsItemInterface" FILE "power.json")
 
 public:
     explicit PowerPlugin(QObject *parent = nullptr);

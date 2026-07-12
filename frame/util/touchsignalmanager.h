@@ -10,7 +10,7 @@
 
 #include <QObject>
 
-using Gesture = org::deepin::dde::Gesture1;
+using Gesture = org::lingmo::Gesture1;
 
 class TouchSignalManager : public QObject
 {

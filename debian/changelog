@@ -1,3 +1,9 @@
+lingmo-dock (6.2.8.lingmo.1) unstable; urgency=medium
+
+  * Lingmo namespace migration.
+
+ -- Lingmo OS Team <team@lingmo.org>  Sun, 12 Jul 2026 23:11:19 +0800
+
 lingmo-dock (6.2.7.lingmo.1) unstable; urgency=medium
 
   * new release for Lingmo OS.

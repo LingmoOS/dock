@@ -18,7 +18,7 @@ class Test_MenuWorker : public ::testing::Test
 
 TEST_F(Test_MenuWorker, coverage_test)
 {
-    MenuWorker *worker = new MenuWorker(new DBusDock("org.deepin.dde.daemon.Dock1", "/org/deepin/dde/daemon/Dock1", QDBusConnection::sessionBus()));
+    MenuWorker *worker = new MenuWorker(new DBusDock("org.lingmo.daemon.Dock1", "/org/lingmo/daemon/Dock1", QDBusConnection::sessionBus()));
     DockItemManager::instance()->m_pluginsInter->m_pluginsMap.clear();
     QMenu *menu = new QMenu();
     menu = worker->createMenu(menu);
@@ -32,7 +32,7 @@ TEST_F(Test_MenuWorker, coverage_test)
 
 TEST_F(Test_MenuWorker, setAutoHide)
 {
-   MenuWorker *worker = new MenuWorker(new DBusDock("org.deepin.dde.daemon.Dock1", "/org/deepin/dde/daemon/Dock1", QDBusConnection::sessionBus()));
+   MenuWorker *worker = new MenuWorker(new DBusDock("org.lingmo.daemon.Dock1", "/org/lingmo/daemon/Dock1", QDBusConnection::sessionBus()));
 
    ASSERT_TRUE(worker->m_autoHide);
    worker->setAutoHide(false);

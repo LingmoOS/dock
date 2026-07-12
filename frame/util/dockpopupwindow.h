@@ -20,7 +20,7 @@
 DWIDGET_USE_NAMESPACE
 DGUI_USE_NAMESPACE
 
-using XEventMonitor = org::deepin::dde::XEventMonitor1;
+using XEventMonitor = org::lingmo::XEventMonitor1;
 
 class DockPopupWindow : public Dtk::Widget::DBlurEffectWidget
 {

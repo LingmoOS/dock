@@ -225,12 +225,12 @@ int main(int argc, char *argv[])
     DBusDockAdaptors adaptor(&windowManager);
     DockDaemonDBusAdaptor daemonAdaptor(&windowManager);
 
-    QDBusConnection::sessionBus().registerService("org.deepin.dde.Dock1");
-    QDBusConnection::sessionBus().registerObject("/org/deepin/dde/Dock1", "org.deepin.dde.Dock1", &windowManager);
+    QDBusConnection::sessionBus().registerService("org.lingmo.Dock1");
+    QDBusConnection::sessionBus().registerObject("/org/lingmo/Dock1", "org.lingmo.Dock1", &windowManager);
 
     //保证dock daemon接口兼容性,dde-desktop,dde-clipboard,deepin-system-monitor,dde-osd等在调用。
-    QDBusConnection::sessionBus().registerService("org.deepin.dde.daemon.Dock1");
-    QDBusConnection::sessionBus().registerObject("/org/deepin/dde/daemon/Dock1", "org.deepin.dde.daemon.Dock1", &windowManager);
+    QDBusConnection::sessionBus().registerService("org.lingmo.daemon.Dock1");
+    QDBusConnection::sessionBus().registerObject("/org/lingmo/daemon/Dock1", "org.lingmo.daemon.Dock1", &windowManager);
 
     // 当任务栏以-r参数启动时，设置CANSHOW未false，之后调用launch不显示任务栏
     qApp->setProperty("CANSHOW", !parser.isSet(runOption));

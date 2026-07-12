@@ -19,16 +19,16 @@
 #include <QRect>
 
 /*
- * Adaptor class for interface org.deepin.dde.daemon.Dock1
+ * Adaptor class for interface org.lingmo.daemon.Dock1
  */
 
 class Entry;
 class DockDaemonDBusAdaptor: public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.deepin.dde.daemon.Dock1")
+    Q_CLASSINFO("D-Bus Interface", "org.lingmo.daemon.Dock1")
     Q_CLASSINFO("D-Bus Introspection", ""
-                                       "  <interface name=\"org.deepin.dde.daemon.Dock1\">\n"
+                                       "  <interface name=\"org.lingmo.daemon.Dock1\">\n"
                                        "    <method name=\"CloseWindow\">\n"
                                        "      <arg direction=\"in\" type=\"u\" name=\"win\"/>\n"
                                        "    </method>\n"

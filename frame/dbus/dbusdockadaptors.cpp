@@ -72,7 +72,7 @@ void registerPluginInfoMetaType()
 
 DBusDockAdaptors::DBusDockAdaptors(WindowManager* parent)
     : QDBusAbstractAdaptor(parent)
-    , m_gsettings(Utils::SettingsPtr("com.deepin.dde.dock.mainwindow", QByteArray(), this))
+    , m_gsettings(Utils::SettingsPtr("com.lingmo.dock.mainwindow", QByteArray(), this))
     , m_windowManager(parent)
 {
     connect(parent, &WindowManager::panelGeometryChanged, this, [ = ] {
@@ -287,7 +287,7 @@ QRect DBusDockAdaptors::geometry() const
 
 bool DBusDockAdaptors::showInPrimary() const
 {
-    return Utils::SettingValue("com.deepin.dde.dock.mainwindow", QByteArray(), "onlyShowPrimary", false).toBool();
+    return Utils::SettingValue("com.lingmo.dock.mainwindow", QByteArray(), "onlyShowPrimary", false).toBool();
 }
 
 void DBusDockAdaptors::setShowInPrimary(bool showInPrimary)
@@ -295,7 +295,7 @@ void DBusDockAdaptors::setShowInPrimary(bool showInPrimary)
     if (this->showInPrimary() == showInPrimary)
         return;
 
-    if (Utils::SettingSaveValue("com.deepin.dde.dock.mainwindow", QByteArray(), "onlyShowPrimary", showInPrimary)) {
+    if (Utils::SettingSaveValue("com.lingmo.dock.mainwindow", QByteArray(), "onlyShowPrimary", showInPrimary)) {
         Q_EMIT showInPrimaryChanged(showInPrimary);
     }
 }
@@ -303,7 +303,7 @@ void DBusDockAdaptors::setShowInPrimary(bool showInPrimary)
 bool DBusDockAdaptors::isPluginValid(const QString &name)
 {
     // 插件被全局禁用时，理应获取不到此插件的任何信息
-    if (!Utils::SettingValue("com.deepin.dde.dock.module." + name, QByteArray(), "enable", true).toBool())
+    if (!Utils::SettingValue("com.lingmo.dock.module." + name, QByteArray(), "enable", true).toBool())
         return false;
 
     // 未开启窗口特效时，不显示多任务视图插件

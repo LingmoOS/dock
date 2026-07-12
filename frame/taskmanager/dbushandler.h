@@ -80,11 +80,11 @@ private:
     QString m_activeWindowMonitorKey;
     TaskManager *m_taskmanager;
 
-    com::deepin::wm *m_wm;
-    org::deepin::dde::WMSwitcher1 *m_wmSwitcher;
-    org::deepin::dde::kwayland1::WindowManager *m_kwaylandManager;
-    org::deepin::dde::XEventMonitor1 *m_xEventMonitor;
-    org::deepin::dde::Launcher1 *m_launcher;
+    com::lingmo::wm *m_wm;
+    org::lingmo::WMSwitcher1 *m_wmSwitcher;
+    org::lingmo::kwayland1::WindowManager *m_kwaylandManager;
+    org::lingmo::XEventMonitor1 *m_xEventMonitor;
+    org::lingmo::Launcher1 *m_launcher;
 
     std::once_flag m_isNewStartManagerAvaliableInited;
 };

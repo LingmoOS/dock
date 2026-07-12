@@ -85,7 +85,7 @@ void DesktopWidget::mousePressEvent(QMouseEvent *event)
  */
 bool DesktopWidget::checkNeedShowDesktop()
 {
-    QDBusInterface wmInter("com.deepin.wm", "/com/deepin/wm", "com.deepin.wm");
+    QDBusInterface wmInter("com.lingmo.wm", "/com/lingmo/wm", "com.lingmo.wm");
     QList<QVariant> argumentList;
     QDBusMessage reply = wmInter.callWithArgumentList(QDBus::Block, QStringLiteral("GetIsShowDesktop"), argumentList);
     if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 1) {

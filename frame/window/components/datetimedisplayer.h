@@ -23,7 +23,7 @@ DCORE_BEGIN_NAMESPACE
 class DConfig;
 DCORE_END_NAMESPACE
 
-using Timedate = org::deepin::dde::Timedate1;
+using Timedate = org::lingmo::Timedate1;
 
 class DateTimeDisplayer : public QWidget
 {

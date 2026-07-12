@@ -207,9 +207,9 @@ void TrashWidget::setDragging(bool state)
 
 void TrashWidget::removeApp(const QString &appKey)
 {
-    DDBusSender().service("org.deepin.dde.Launcher1")
+    DDBusSender().service("org.lingmo.Launcher1")
             .path("/org/deepin/dde/Launcher1")
-            .interface("org.deepin.dde.Launcher1")
+            .interface("org.lingmo.Launcher1")
             .method("UninstallApp")
             .arg(appKey)
             .call();

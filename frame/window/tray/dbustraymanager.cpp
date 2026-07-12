@@ -10,7 +10,7 @@
  */
 
 DBusTrayManager::DBusTrayManager(QObject *parent)
-    : QDBusAbstractInterface("org.deepin.dde.TrayManager1", "/org/deepin/dde/TrayManager1", staticInterfaceName(), QDBusConnection::sessionBus(), parent)
+    : QDBusAbstractInterface("org.lingmo.TrayManager1", "/org/lingmo/TrayManager1", staticInterfaceName(), QDBusConnection::sessionBus(), parent)
 {
     qRegisterMetaType<TrayList>("TrayList");
     qDBusRegisterMetaType<TrayList>();

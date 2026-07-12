@@ -40,7 +40,7 @@ const QString longTimeFormat_key = "longTimeFormat";
 
 DateTimeDisplayer::DateTimeDisplayer(bool showMultiRow, QWidget *parent)
     : QWidget (parent)
-    , m_timedateInter(new Timedate("org.deepin.dde.Timedate1", "/org/deepin/dde/Timedate1", QDBusConnection::sessionBus(), this))
+    , m_timedateInter(new Timedate("org.lingmo.Timedate1", "/org/lingmo/Timedate1", QDBusConnection::sessionBus(), this))
     , m_position(Dock::Position::Bottom)
     , m_dateFont(QFont())
     , m_timeFont(QFont())
@@ -198,9 +198,9 @@ void DateTimeDisplayer::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
 
-    DDBusSender().service("com.deepin.Calendar")
+    DDBusSender().service("com.lingmo.Calendar")
             .path("/com/deepin/Calendar")
-            .interface("com.deepin.Calendar")
+            .interface("com.lingmo.Calendar")
             .method("RaiseWindow").call();
 }
 

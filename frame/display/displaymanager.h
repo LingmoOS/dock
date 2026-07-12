@@ -12,7 +12,7 @@
 #include "constants.h"
 #include "org_deepin_dde_display1.h"
 
-using DisplayInter = org::deepin::dde::Display1;
+using DisplayInter = org::lingmo::Display1;
 using namespace Dock;
 
 class QScreen;

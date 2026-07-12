@@ -28,7 +28,7 @@
 #include <QDBusArgument>
 
 /*
- * Adaptor class for interface org.deepin.dde.Dock1
+ * Adaptor class for interface org.lingmo.Dock1
  */
 class QGSettings;
 class WindowManager;
@@ -60,9 +60,9 @@ void registerPluginInfoMetaType();
 class DBusDockAdaptors: public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.deepin.dde.Dock1")
+    Q_CLASSINFO("D-Bus Interface", "org.lingmo.Dock1")
     Q_CLASSINFO("D-Bus Introspection", ""
-                                       "  <interface name=\"org.deepin.dde.Dock1\">\n"
+                                       "  <interface name=\"org.lingmo.Dock1\">\n"
                                        "    <property access=\"read\" type=\"(iiii)\" name=\"geometry\"/>\n"
                                        "    <property access=\"readwrite\" type=\"b\" name=\"showInPrimary\"/>\n"
                                        "    <method name=\"callShow\"/>"

@@ -66,7 +66,7 @@ bool NotificationPlugin::pluginIsDisable()
 const QString NotificationPlugin::itemCommand(const QString &itemKey)
 {
     Q_UNUSED(itemKey);
-    return QString("dbus-send --session --print-reply --dest=org.deepin.dde.Widgets1 /org/deepin/dde/Widgets1 org.deepin.dde.Widgets1.Toggle");
+    return QString("dbus-send --session --print-reply --dest=org.lingmo.Widgets1 /org/lingmo/Widgets1 org.lingmo.Widgets1.Toggle");
 }
 
 const QString NotificationPlugin::itemContextMenu(const QString &itemKey)
@@ -98,9 +98,9 @@ void NotificationPlugin::invokedMenuItem(const QString &itemKey, const QString &
     if (menuId == TOGGLE_DND) {
         m_notification->setDndMode(!m_notification->dndMode());
     } else if (menuId == NOTIFICATION_SETTINGS) {
-        DDBusSender().service("org.deepin.dde.ControlCenter1")
+        DDBusSender().service("org.lingmo.ControlCenter1")
             .path("/org/deepin/dde/ControlCenter1")
-            .interface("org.deepin.dde.ControlCenter1")
+            .interface("org.lingmo.ControlCenter1")
             .method("ShowPage")
             .arg(QString("notification")).call();
     }

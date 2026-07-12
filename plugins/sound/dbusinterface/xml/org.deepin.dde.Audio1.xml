@@ -1,4 +1,4 @@
-  <interface name="org.deepin.dde.Audio1">
+  <interface name="org.lingmo.Audio1">
     <method name="Reset"/>
     <method name="SetDefaultSink">
       <arg type="s" direction="in"/>

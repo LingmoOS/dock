@@ -1,4 +1,4 @@
-<interface name="com.deepin.wm">
+<interface name="com.lingmo.wm">
     <property access="readwrite" type="b" name="compositingEnabled"/>
     <property access="read" type="b" name="compositingPossible"/>
     <property access="read" type="b" name="compositingAllowSwitch"/>

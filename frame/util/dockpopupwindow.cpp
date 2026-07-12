@@ -46,7 +46,7 @@ DockPopupWindow::DockPopupWindow(QWidget *parent)
     connect(m_eventMonitor, &XEventMonitor::ButtonPress, this, &DockPopupWindow::onButtonPress);
 
     if (Utils::IS_WAYLAND_DISPLAY)
-        QDBusConnection::sessionBus().connect("com.deepin.dde.lockFront", "/com/deepin/dde/lockFront", "com.deepin.dde.lockFront", "Visible", "b", this, SLOT(hide()));
+        QDBusConnection::sessionBus().connect("com.lingmo.lockFront", "/com/lingmo/lockFront", "com.lingmo.lockFront", "Visible", "b", this, SLOT(hide()));
 }
 
 DockPopupWindow::~DockPopupWindow()

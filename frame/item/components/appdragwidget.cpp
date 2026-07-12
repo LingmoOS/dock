@@ -14,7 +14,7 @@
 #define SPLIT_LEFT 1
 #define SPLIT_RIGHT 2
 
-using XEventMonitor = ::org::deepin::dde::XEventMonitor1;
+using XEventMonitor = ::org::lingmo::XEventMonitor1;
 
 AppDragWidget::AppDragWidget(QWidget *parent)
     : QGraphicsView(parent)
@@ -28,7 +28,7 @@ AppDragWidget::AppDragWidget(QWidget *parent)
     , m_goBackAnim(new QPropertyAnimation(this, "pos", this))
     , m_dockPosition(Dock::Position::Bottom)
     , m_popupWindow(new DockPopupWindow(nullptr))
-    , m_distanceMultiple(Utils::SettingValue("com.deepin.dde.dock.distancemultiple", "/com/deepin/dde/dock/distancemultiple/", "distance-multiple", 1.5).toDouble())
+    , m_distanceMultiple(Utils::SettingValue("com.lingmo.dde.dock.distancemultiple", "/com/lingmo/dde/dock/distancemultiple/", "distance-multiple", 1.5).toDouble())
     , m_item(nullptr)
     , m_dockScreen(nullptr)
 {
