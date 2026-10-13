@@ -25,6 +25,18 @@
 
 #define DRAG_AREA_SIZE (5)
 
+// 拖拽缩放可用时任务栏边缘显示的光标；禁用后返回普通箭头，
+// 避免鼠标移到边缘仍提示可缩放。开关见 interfaces/constants.h。
+static Qt::CursorShape dragResizeCursor(const Dock::Position &position)
+{
+#if DOCK_EDGE_DRAG_RESIZE
+    return (Dock::Top == position || Dock::Bottom == position) ? Qt::SizeVerCursor : Qt::SizeHorCursor;
+#else
+    Q_UNUSED(position);
+    return Qt::ArrowCursor;
+#endif
+}
+
 // 任务栏圆角最小的时候，任务栏的高度值
 #define MIN_RADIUS_WINDOWSIZE 46
 // 任务栏圆角最小值和最大值的差值
@@ -102,10 +114,12 @@ void MainWindowBase::initAttribute()
     m_dragWidget->setMouseTracking(true);
     m_dragWidget->setFocusPolicy(Qt::NoFocus);
 
-    if ((Dock::Top == m_position) || (Dock::Bottom == m_position))
-        m_dragWidget->setCursor(Qt::SizeVerCursor);
-    else
-        m_dragWidget->setCursor(Qt::SizeHorCursor);
+    m_dragWidget->setCursor(dragResizeCursor(m_position));
+#if !DOCK_EDGE_DRAG_RESIZE
+    // 鼠标事件直接穿透：既不显示缩放光标，也不会吞掉边缘 5px 内的点击。
+    // DragWidget 仍然保留，触摸拖拽依靠主动投递的合成事件驱动。
+    m_dragWidget->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+#endif
 }
 
 void MainWindowBase::initConnection()
@@ -259,11 +273,7 @@ void MainWindowBase::updateDragGeometry()
     }
 
     m_dragWidget->raise();
-    if ((Top == position()) || (Bottom == position())) {
-        m_dragWidget->setCursor(Qt::SizeVerCursor);
-    } else {
-        m_dragWidget->setCursor(Qt::SizeHorCursor);
-    }
+    m_dragWidget->setCursor(dragResizeCursor(position()));
 }
 
 void MainWindowBase::resetDragWindow()
@@ -304,6 +314,12 @@ void MainWindowBase::resetDragWindow()
 
 void MainWindowBase::touchRequestResizeDock()
 {
+#if !DOCK_EDGE_DRAG_RESIZE
+    // 触摸拖拽缩放同样禁用：任务栏尺寸统一由控制中心调整，
+    // 避免出现"鼠标拖不动但手指还能改"的不一致行为。
+    return;
+#endif
+
     const QPoint touchPos(QCursor::pos());
     QRect dockRect = geometry();
     // 隐藏状态返回

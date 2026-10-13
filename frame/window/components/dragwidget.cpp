@@ -40,9 +40,19 @@ void DragWidget::onTouchMove(double scaleX, double scaleY)
 
 void DragWidget::mousePressEvent(QMouseEvent *event)
 {
+#if !DOCK_EDGE_DRAG_RESIZE
+    // 鼠标拖拽缩放已禁用：任务栏尺寸统一由控制中心调整。
+    // 这里只接受触摸路径主动投递的合成事件（MainWindowBase::touchRequestResizeDock），
+    // 真实鼠标事件与 Qt 自行转发的触屏事件都不响应，并交还给父窗口处理。
+    if (event->source() != Qt::MouseEventSynthesizedByApplication) {
+        event->ignore();
+        return;
+    }
+#else
     // qt转发的触屏按下信号不进行响应
     if (event->source() == Qt::MouseEventSynthesizedByQt)
         return;
+#endif
 
     if (event->button() == Qt::LeftButton) {
         m_resizePoint = event->globalPos();

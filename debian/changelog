@@ -1,3 +1,9 @@
+lingmo-dock (6.2.8.lingmo5u1) unstable; urgency=medium
+
+  * 禁用鼠标和触摸拖拽任务栏边缘调整尺寸，尺寸统一由控制中心调整。
+
+ -- Lingmo OS Team <team@lingmo.org>  Tue, 13 Oct 2026 22:53:56 +0800
+
 lingmo-dock (6.2.7.lingmo.1) unstable; urgency=medium
 
   * new release for Lingmo OS.

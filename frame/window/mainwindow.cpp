@@ -94,11 +94,13 @@ void MainWindow::setPosition(const Position &position)
     MainWindowBase::setPosition(position);
     m_mainPanel->setPositonValue(position);
 
+#if DOCK_EDGE_DRAG_RESIZE
     // 更新鼠标拖拽样式，在类内部设置到qApp单例上去
     if ((Top == position) || (Bottom == position))
         m_mainPanel->setCursor(Qt::SizeVerCursor);
     else
         m_mainPanel->setCursor(Qt::SizeHorCursor);
+#endif
 }
 
 void MainWindow::setDisplayMode(const Dock::DisplayMode &displayMode)

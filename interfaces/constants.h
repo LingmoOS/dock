@@ -36,6 +36,11 @@ namespace Dock {
 #define DOCK_MIN_SIZE 40
 // dock最大尺寸
 #define DOCK_MAX_SIZE 100
+
+// 是否允许通过拖拽任务栏边缘调整任务栏尺寸（鼠标与触摸）。
+// 默认关闭：任务栏尺寸统一由控制中心调整（D-Bus org.deepin.dde.Dock1.resizeDock）。
+// 置为 1 可同时恢复鼠标拖拽与触摸拖拽。
+#define DOCK_EDGE_DRAG_RESIZE 0
 ///
 /// \brief The DisplayMode enum
 /// spec dock display mode
