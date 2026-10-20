@@ -1,3 +1,12 @@
+lingmo-dock (6.2.9.lingmo5u1) unstable; urgency=medium
+
+  * fix: HiDPI下图标模糊和错位（launcher、显示桌面、多任务视图）
+  * fix: ImageUtil::loadSvg 修复物理像素尺寸和devicePixelRatio丢失问题
+  * fix: 所有内部插件IID更新为2_0_0，修复开机"插件不兼容"通知
+  * feat: 新增pluginsiteminterface_v2.h兼容别名，支持外部插件（网络等）加载
+
+ -- Lingmo OS Team <team@lingmo.org>  Tue, 20 Oct 2026 17:30:00 +0800
+
 lingmo-dock (6.2.8.lingmo5u1) unstable; urgency=medium
 
   * 禁用鼠标和触摸拖拽任务栏边缘调整尺寸，尺寸统一由控制中心调整。
