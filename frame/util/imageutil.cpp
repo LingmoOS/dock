@@ -26,16 +26,16 @@
 const QPixmap ImageUtil::loadSvg(const QString &iconName, const QString &localPath, const int size, const qreal ratio)
 {
     QIcon icon = QIcon::fromTheme(iconName);
-    int pixmapSize = QCoreApplication::testAttribute(Qt::AA_UseHighDpiPixmaps) ? size : int(size * ratio);
+    const int physicalSize = int(size * ratio);
     if (!icon.isNull()) {
-        QPixmap pixmap = icon.pixmap(pixmapSize);
+        QPixmap pixmap = icon.pixmap(physicalSize);
+        if (pixmap.size() != QSize(physicalSize, physicalSize))
+            pixmap = pixmap.scaled(physicalSize, physicalSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         pixmap.setDevicePixelRatio(ratio);
-        if (ratio == 1)
-            return pixmap;
-        return pixmap.scaled(size * ratio, size * ratio);
+        return pixmap;
     }
 
-    QPixmap pixmap(pixmapSize, pixmapSize);
+    QPixmap pixmap(physicalSize, physicalSize);
     QString localIcon = QString("%1%2%3").arg(localPath).arg(iconName).arg(iconName.contains(".svg") ? "" : ".svg");
     QSvgRenderer renderer(localIcon);
     pixmap.fill(Qt::transparent);
@@ -46,26 +46,20 @@ const QPixmap ImageUtil::loadSvg(const QString &iconName, const QString &localPa
     painter.end();
     pixmap.setDevicePixelRatio(ratio);
 
-    if (ratio == 1)
-        return pixmap;
-
-    return pixmap.scaled(size * ratio, size * ratio);
+    return pixmap;
 }
 
 const QPixmap ImageUtil::loadSvg(const QString &iconName, const QSize size, const qreal ratio)
 {
     QIcon icon = QIcon::fromTheme(iconName);
+    const QSize physicalSize = QSize(size * ratio);
     if (!icon.isNull()) {
-        QPixmap pixmap = icon.pixmap(QCoreApplication::testAttribute(Qt::AA_UseHighDpiPixmaps) ? size : QSize(size * ratio));
+        QPixmap pixmap = icon.pixmap(physicalSize);
+        if (pixmap.size().width() > physicalSize.width())
+            pixmap = pixmap.scaledToWidth(physicalSize.width(), Qt::SmoothTransformation);
+        if (pixmap.size().height() > physicalSize.height())
+            pixmap = pixmap.scaledToHeight(physicalSize.height(), Qt::SmoothTransformation);
         pixmap.setDevicePixelRatio(ratio);
-        if (ratio == 1)
-            return pixmap;
-
-        if (pixmap.size().width() > size.width() * ratio)
-            pixmap = pixmap.scaledToWidth(size.width() * ratio);
-        if (pixmap.size().height() > size.height() * ratio)
-            pixmap = pixmap.scaledToHeight(size.height() * ratio);
-
         return pixmap;
     }
     return QPixmap();

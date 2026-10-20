@@ -29,11 +29,14 @@ LauncherItem::LauncherItem(QWidget *parent)
 
 void LauncherItem::refreshIcon()
 {
+    const auto ratio = devicePixelRatioF();
     const int iconSize = qMin(width(), height());
     const int size = DockDisplayMode == Efficient ? iconSize * 0.7 : iconSize * 0.8;
+    const int physicalSize = qRound(size * ratio);
 
-    m_icon = QPixmap(size, size);
+    m_icon = QPixmap(physicalSize, physicalSize);
     m_icon.fill(Qt::transparent);
+    m_icon.setDevicePixelRatio(ratio);
 
     QSvgRenderer renderer(QString(":/icons/resources/rocket.svg"));
     QPainter painter(&m_icon);

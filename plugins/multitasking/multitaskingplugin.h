@@ -18,7 +18,7 @@ class MultitaskingPlugin : public QObject, PluginsItemInterface
 {
     Q_OBJECT
     Q_INTERFACES(PluginsItemInterface)
-    Q_PLUGIN_METADATA(IID "com.deepin.dock.PluginsItemInterface" FILE "multitasking.json")
+    Q_PLUGIN_METADATA(IID "com.deepin.dock.PluginsItemInterface_2_0_0" FILE "multitasking.json")
 
 public:
     explicit MultitaskingPlugin(QObject *parent = nullptr);
