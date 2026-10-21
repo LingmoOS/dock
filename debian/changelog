@@ -1,3 +1,10 @@
+lingmo-dock (6.2.10.lingmo5u1) unstable; urgency=medium
+
+  * fix(show-desktop,multitasking): use qMin(width,height) for icon size
+    to prevent icon overflow on horizontal dock
+
+ -- Lingmo OS Team <team@lingmo.org>  Tue, 20 Oct 2026 19:00:00 +0800
+
 lingmo-dock (6.2.9.lingmo5u1) unstable; urgency=medium
 
   * fix: HiDPI下图标模糊和错位（launcher、显示桌面、多任务视图）

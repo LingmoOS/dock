@@ -25,8 +25,9 @@ void ShowDesktopWidget::paintEvent(QPaintEvent *e)
     Q_UNUSED(e);
 
     const auto ratio = devicePixelRatioF();
+    const int iconSize = qMin(this->size().width(), this->size().height());
     const int size = Dock::Fashion == qApp->property(PROP_DISPLAY_MODE).value<Dock::DisplayMode>()
-        ? int(this->size().width() * 0.8) : int(this->size().width() * 0.7);
+        ? int(iconSize * 0.8) : int(iconSize * 0.7);
     const int physicalSize = qRound(size * ratio);
 
     QPixmap icon(physicalSize, physicalSize);
